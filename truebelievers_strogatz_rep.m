@@ -8,6 +8,9 @@
 p = .1344;
 
 % right hand side of system of DEs
+% u(1) = n_A
+% u(2) = n_B
+% p = A zealots
 rhs = @(t,u) [(1 - u(1) - u(2) - p)*(u(1) + p) - u(1)*(u(2)) ; ...
     (1 - u(1) - u(2) - p)*(u(2)) - u(2)*(u(1) + p)];
 
@@ -39,6 +42,8 @@ i1 = -.15;
 i2 = .05;
 
 % right hand side of system
+% u(1) = n1A, u(2) = n1B, u(3) = n2A, u(4) = n2B, p1 = A_zealots from city
+% 1, p2 = A_zealots from city 2.
 rhs = @(t,u) ...
     [(1 - u(1) - u(2) - p1)*(u(1) + p1 + i2*(u(3) + p2)) - u(1)*(u(2) + i2*u(4)) ; ...
     (1 - u(1) - u(2) - p1)*(u(2)+i2*u(4)) - u(2)*(u(1) + p1 + i2*(u(3) + p2)) ; ...
