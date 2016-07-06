@@ -1,5 +1,5 @@
 function [x, y] = expFile(n, k, tend)
-% this the help page for expFile
+% Takes in an n, k and tend and tests k matrices of nXn 
     x = [];
     y = [];
     u = [];
@@ -59,7 +59,7 @@ function [b] = Bdies(A, vertex, p_val, tend)
     [T, U] = tbMod1f(n,A,u_init,p_init,tend);
     bs = U(length(U),(n+1):(2*n));
     avgb = mean(bs);
-    if avgb < 1 - (1/16),
+    if avgb < 1*(10^(-7)),
         b = 1;
     else
         b = 0;

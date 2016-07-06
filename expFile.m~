@@ -1,5 +1,5 @@
 function [x, y] = expFile(n, k, tend)
-% this the help page for expFile
+% Takes in an n, k and tend and tests k matrices of nXn
     x = [];
     y = [];
     u = [];
@@ -10,11 +10,13 @@ function [x, y] = expFile(n, k, tend)
              A = irrStoch(i, 1);
              r = eigRank(A);
              p_vals = findPs(A, tend);
+             p = p_vals;
              x = [x, r];
              y = [y, p];
          end
      end
 end
+
 
 
 function [p_vals] = findPs(A, tend)
@@ -23,7 +25,7 @@ function [p_vals] = findPs(A, tend)
     n = length(A);
     p_vals = [];
     for i = 1:n
-        p = findP(A, i, tend, 0, 10^(-1), 3);
+        p = findP(A, i, tend, 0, 10^(-1), 4);
         disp(p)
         p_vals(i) = p;
     end
@@ -57,11 +59,11 @@ function [b] = Bdies(A, vertex, p_val, tend)
     [T, U] = tbMod1f(n,A,u_init,p_init,tend);
     bs = U(length(U),(n+1):(2*n));
     avgb = mean(bs);
-    if avgb <= 1*(10^-7),
+    if avgb < 1 - (1/16),
         b = 1;
     else
         b = 0;
-    end   
+    end  
 end
 
 function [u_init, p_init] = initU(n, vertex, p_val)
